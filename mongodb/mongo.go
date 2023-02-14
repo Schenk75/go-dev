@@ -2,10 +2,10 @@ package mongodb
 
 import (
 	"context"
-	"go.mongodb.org/mongo-driver/bson"
 	"sync"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -47,7 +47,7 @@ func (c *MongoClient) GetID(dbName, collection string) (int64, error) {
 		bson.M{"name": collection},
 		bson.M{"$inc": bson.M{"next_id": 1}}).Decode(&result)
 	if err == mongo.ErrNoDocuments {
-		_, err = client.Database(dbName).Collection(ID).InsertOne(ctx, bson.M{"name": collection, "next_id": 1})
+		_, err = client.Database(dbName).Collection(ID).InsertOne(ctx, bson.M{"name": collection, "next_id": 2})
 		if err != nil {
 			return -1, err
 		}
